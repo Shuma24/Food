@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes} from 'react-router-dom';
+import { Layout } from './pages/Layout'
+import { Home } from './pages/Home'
+import { About } from './pages/About'
+import { Contacts } from './pages/Contacts'
+import { Notfound } from './pages/Notfound'
+import { ContextProvider } from './context'
+import { Category } from './pages/Category'
+import { Recipe } from './pages/Recipe'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <ContextProvider>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />}/>
+          <Route path='About' element={<About />}/>
+          <Route path='Contacts' element={<Contacts />}/>
+          <Route path='Category/:name' element={<Category />}/>
+          <Route path='Recipe/:id' element={<Recipe />}/>
+          <Route path='*' element={<Notfound />}/>
+        </Route>
+      </Routes>
+   </ContextProvider>
   );
 }
 
